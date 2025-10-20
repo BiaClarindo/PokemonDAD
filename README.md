@@ -11,3 +11,7 @@ Trabalho de desenvolvimento: Web site de pokemon
 - React
 - JavaScript/Vite
 - Html/CSS
+
+### Organização do projeto
+- Estrutura da aplicação - Giulia
+- Estlização e organização - Bianca
