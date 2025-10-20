@@ -1,7 +1,8 @@
 import { useState } from 'react'
-import './App.css'
+import './Register.css'
 
-function App() {
+
+function Register({onAddPokemon}) {
   const [pokemons, setNovoPokemon] = useState([]);
   const [nome, setNome] = useState("");
   const [descricao, setDescricao] = useState("");
@@ -21,7 +22,7 @@ function App() {
     }
 
     const pokemon = {nome, tipo, descricao, poder};
-    setNovoPokemon([...pokemons, pokemon]);
+    onAddPokemon(pokemon);
     setMensagem(`${nome} cadastrado com sucesso`);
 
     setDescricao("");
@@ -60,25 +61,9 @@ function App() {
     {erro && <p className="erro">{erro}</p>}
     {mensagemResposta && <p className="resposta">{mensagemResposta}</p>}
 
-   
-      <h2>Conheça os Pokémons já cadastrados!</h2>
-      <div className="pokemons">
-        {pokemons.length == 0 ? (
-          <p>Nenhum pokémon foi cadastrado</p>
-        ) : (
-          pokemons.map((p, index) => (
-            <div key={index} className="pokemon-card">
-              <h3>{p.nome}</h3>
-              <p>Tipo: {p.tipo}</p>
-              <p>Poder:{p.poder}</p>
-              <p>{p.descricao}</p>
-            </div>
-          )
-        ))}
-      </div>
    </div>
 
   )
 }
 
-export default App
+export default Register

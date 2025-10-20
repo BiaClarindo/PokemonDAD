@@ -1,26 +1,48 @@
-import { useState } from 'react'
-import './App.css'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import SideBar from './Components/Sidebar.jsx/SideBar.js';
+// No arquivo App.jsx
+
+import { useState } from 'react'; // Não se esqueça de importar
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import SideBar from './Components/Sidebar/Sidebar.jsx';
 import Register from './Pages/Register/Register.jsx';
 import ListPokemons from './Pages/ListPokemons/Pokemons.jsx';
+import './App.css';
+
 function App() {
-  // Removendo o padding do contêiner principal e movendo o minHeight para o CSS global.
-  // Vamos usar um className aqui para facilitar o estilo.
+  const [pokemons, setPokemons] = useState([]);
+  
+  const handleAddPokemon = (novoPokemon) => {
+    const novaLista = [...pokemons, novoPokemon];
+    setPokemons(novaLista);
+    console.log("Pokémon adicionado! Nova lista no App:", novaLista);
+  };
+  
+  const handleDeletePokemon = (indexParaApagar) => {
+    const novaLista = pokemons.filter((_, index) => index !== indexParaApagar);
+    setPokemons(novaLista);
+  };
+
+  console.log("Renderizando App, Pokémons atuais:", pokemons);
+
+
   return (
     <Router>
-      <div className="app-layout"> 
+      <div>
         <SideBar />
-
-        <div className="main-content">
+        <main style={{ flexGrow: 1, padding: '20px' }}>
           <Routes>
-            <Route path="/" element={<Register />} />
-            <Route path="/listPokemons" element={<ListPokemons />} />
+            <Route 
+              path="/" 
+              element={<Register onAddPokemon={handleAddPokemon} />} 
+            />
+            <Route 
+              path="/listagem" 
+              element={<ListPokemons pokemons={pokemons} onDeletePokemon={handleDeletePokemon} />} 
+            />
           </Routes>
-        </div>
+        </main>
       </div>
     </Router>
-  )
+  );
 }
 
-export default App
+export default App;

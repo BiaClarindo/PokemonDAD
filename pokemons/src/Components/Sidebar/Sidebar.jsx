@@ -1,6 +1,10 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import styles from './Sidebar.module.css';
+import styles from "./Sidebar.module.css";
+import logo from '../../assets/images/logo-pokemon.png';
+import iconRegister from '../../assets/images/icon-register.png';
+import iconList from '../../assets/images/icon-list.png';
+
 
 function SideBar() {
   const location = useLocation(); 
@@ -14,32 +18,30 @@ function SideBar() {
       <div> 
         <div className={styles.logo}>
           <img src={logo} alt="Pokemon" width={60} height={60}/> 
-          <span>ZETA</span>
+          <span>Pokemon</span>
         </div>
 
         <nav>
           <ul>
             <li>
+              {/* CORREÇÃO: O caminho para getLinkClass deve corresponder ao 'to' */}
               <Link to="/" className={getLinkClass("/")}>
-                  <img src={iconHome} alt="Register" width={20} height={20} />
+                  <img src={iconRegister} alt="Register" width={20} height={20} />
                   Cadastrar
               </Link>
             </li>
             <li>
-              <Link to="/curso" className={getLinkClass("/curso")}>
-                  <img src={iconCurso} alt="List" width={20} height={20} />
+              {/* CORREÇÃO: O 'to' deve apontar para a rota de listagem */}
+              <Link to="/listagem" className={getLinkClass("/listagem")}>
+                  <img src={iconList} alt="List" width={20} height={20} />
                   Listar
               </Link>
             </li>
           </ul>
         </nav>
       </div>
-      
-      <div className={styles.exploreButton}>
-        <div>Explorar novas funcionalidades</div>
-        <div>acesse novos planos</div>
-        <button>Planos</button> 
-      </div>
     </div>
   );
 }
+
+export default SideBar;
